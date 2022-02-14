@@ -1,0 +1,41 @@
+body {
+  padding: 0;
+  margin: 0;
+}
+
+.container {
+  height: 700px;
+  border: solid red;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+h1 {
+  border: solid;
+  text-align: center;
+}
+
+.game-board {
+  width: 70%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: solid;
+}
+
+.player {
+  height: 400px;
+  width: 300px;
+  border: solid;
+}
+
+.pigs {
+  border: solid;
+}
+
+.btn {
+  width: 300px;
+  height: 50px;
+}

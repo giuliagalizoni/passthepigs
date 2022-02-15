@@ -4,11 +4,52 @@
 // O jogador pode passar os porcos a qualquer momento, mantendo os pontos acumulados. A RODADA ACABA
 // Quem chegar a 100 pontos primeiro ganha.
 
-class Game {
-  constructor(player1, player2) {
-    this.player1 = player1;
-    this.player2 = player2;
-    this.round = 0;
+const SELECTION_ENUM = {
+  leaningJowler: "LEANING JOWLER",
+  snouter: "SNOUTER",
+  sider: "SIDER",
+  makingBacon: "MAKIN' BACON",
+  razorback: "RAZORBACK",
+  piggyBack: "PIGGY BACK",
+  pigOut: "PIG OUT",
+};
+
+class Round {
+  constructor(player) {
+    this.activePlayer = player;
+    this.roundOver = false;
+  }
+
+  addPoints() {
+    if (
+      this.activePlayer.currentPigsPosition === SELECTION_ENUM.leaningJowler
+    ) {
+      console.log("leaning jowler");
+      this.activePlayer.points += 15;
+    } else if (
+      this.activePlayer.currentPigsPosition === SELECTION_ENUM.snouter
+    ) {
+      this.activePlayer.points += 10;
+    } else if (this.activePlayer.currentPigsPosition === SELECTION_ENUM.sider) {
+      this.activePlayer.points += 1;
+    } else if (
+      this.activePlayer.currentPigsPosition === SELECTION_ENUM.makingBacon
+    ) {
+      this.activePlayer.points = 0;
+    } else if (
+      this.activePlayer.currentPigsPosition === SELECTION_ENUM.razorback
+    ) {
+      this.activePlayer.points += 5;
+    } else if (
+      this.activePlayer.currentPigsPosition === SELECTION_ENUM.piggyBack
+    ) {
+      this.activePlayer.points += 1;
+    } else if (
+      this.activePlayer.currentPigsPosition === SELECTION_ENUM.pigOut
+    ) {
+      this.activePlayer.points = 0;
+      this.roundOver = true;
+    }
   }
 }
 
@@ -19,11 +60,30 @@ class Player {
     this.currentPigsPosition = "";
   }
 
-  rollThePigs() {
+  rollThePigs(selection) {
     // escolher aleatóriamente uma posição
+    this.currentPigsPosition = SELECTION_ENUM[selection];
   }
 
   passThePigs() {
     // terminar a rodada
+    Round.roundOver = true;
+    this.points = Round.roundPoints;
   }
 }
+
+// const round = new Round(new Player("Giulia"));
+
+// round.activePlayer.rollThePigs("leaningJowler");
+// round.addPoints();
+
+// round.activePlayer.rollThePigs("sider");
+// round.addPoints();
+
+// round.activePlayer.rollThePigs("razorback");
+// round.addPoints();
+
+// round.activePlayer.rollThePigs("pigOut");
+// round.addPoints();
+
+// console.log(round);

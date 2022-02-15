@@ -1,4 +1,6 @@
 body {
+  font-family: Roboto Slab, serif;
+  font-size: 16px;
   padding: 0;
   margin: 0;
 }
@@ -13,29 +15,45 @@ body {
 }
 
 h1 {
-  border: solid;
   text-align: center;
+  font-size: 10vh;
+  margin: 0;
 }
 
 .game-board {
-  width: 70%;
+  width: 90%;
+  height: 70%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: solid;
 }
 
 .player {
-  height: 400px;
-  width: 300px;
-  border: solid;
+  height: 430px;
+  width: 400px;
+  text-align: center;
+  background-color: lightcoral;
+  border-radius: 8%;
+}
+
+.player p {
+  font-size: 5vh;
 }
 
 .pigs {
-  border: solid;
+  width: 180px;
+  height: 180px;
+  background-color: blueviolet;
+  border-radius: 50%;
+}
+
+.pig-img {
+  height: 150px;
 }
 
 .btn {
   width: 300px;
   height: 50px;
+  font-family: Roboto Slab, serif;
+  font-size: 2vh;
 }

@@ -18,26 +18,27 @@
   </head>
   <body>
     <div class="container">
-      <h1>Pass the pig</h1>
+      <h1>Pass the pigs</h1>
 
       <div class="game-board">
         <div class="player">
           <p>Player 1</p>
-          <p>0</p>
+          <p><span id="points-player1">0</span> points</p>
         </div>
-        <div class="pigs">
-          <img class="pig-img" src="./images/pigg-_0000_leaning-jowler.png" />
+        <div id="pigs-spot" class="pigs">
+          <img id="pigs" src="" class="pig-img" />
         </div>
         <div class="player">
           <p>Player 2</p>
-          <p>0</p>
+          <p><span id="points-player2">0</span> points</p>
         </div>
       </div>
 
-      <button class="btn btn-pass">PASS THE PIG</button>
-      <button class="btn btn-roll">ROLL THE PIG</button>
+      <button id="btn-roll-the-pigs" class="btn btn-roll">ROLL THE PIGS</button>
+      <button id="btn-pass-the-pigs" class="btn btn-pass">PASS THE PIGS</button>
     </div>
 
     <script src="./assets/scripts/game.js"></script>
+    <script src="./assets/scripts/index.js"></script>
   </body>
 </html>

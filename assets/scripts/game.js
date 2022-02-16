@@ -5,13 +5,13 @@
 // Quem chegar a 100 pontos primeiro ganha.
 
 const SELECTION_ENUM = {
-  leaningJowler: "LEANING JOWLER",
-  snouter: "SNOUTER",
-  sider: "SIDER",
-  makingBacon: "MAKIN' BACON",
-  razorback: "RAZORBACK",
-  piggyBack: "PIGGY BACK",
-  pigOut: "PIG OUT",
+  leaningJowler: "leaning-jowler",
+  snouter: "snouter",
+  sider: "sider",
+  makingBacon: "makin-bacon",
+  razorback: "razorback",
+  piggyBack: "piggy-back",
+  pigOut: "pig-out",
 };
 
 class Round {
@@ -24,7 +24,6 @@ class Round {
     if (
       this.activePlayer.currentPigsPosition === SELECTION_ENUM.leaningJowler
     ) {
-      console.log("leaning jowler");
       this.activePlayer.points += 15;
     } else if (
       this.activePlayer.currentPigsPosition === SELECTION_ENUM.snouter
@@ -60,9 +59,9 @@ class Player {
     this.currentPigsPosition = "";
   }
 
-  rollThePigs(selection) {
+  rollThePigs(position) {
     // escolher aleatóriamente uma posição
-    this.currentPigsPosition = SELECTION_ENUM[selection];
+    this.currentPigsPosition = SELECTION_ENUM[position];
   }
 
   passThePigs() {

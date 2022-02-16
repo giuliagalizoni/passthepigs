@@ -32,7 +32,7 @@ h1 {
   height: 430px;
   width: 400px;
   text-align: center;
-  background-color: lightcoral;
+  background-color: #ebebff;
   border-radius: 8%;
 }
 
@@ -43,12 +43,12 @@ h1 {
 .pigs {
   width: 180px;
   height: 180px;
-  background-color: blueviolet;
+  background-color: #ff8080;
   border-radius: 50%;
 }
 
 .pig-img {
-  height: 150px;
+  width: 200px;
 }
 
 .btn {
@@ -56,4 +56,14 @@ h1 {
   height: 50px;
   font-family: Roboto Slab, serif;
   font-size: 2vh;
+  font-weight: bold;
+  border: none;
+}
+
+.btn-pass {
+  background-color: #ff884d;
+}
+
+.btn-roll {
+  background-color: #00e673;
 }

@@ -58,6 +58,7 @@ h1 {
   font-size: 2vh;
   font-weight: bold;
   border: none;
+  margin: 4px;
 }
 
 .btn-pass {

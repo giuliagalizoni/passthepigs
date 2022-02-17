@@ -3,6 +3,8 @@ const round = new Round(new Player("Player 1"));
 const rollBtnElement = document.getElementById("btn-roll-the-pigs");
 const passBtnElement = document.getElementById("btn-pass-the-pigs");
 const pigsImgElement = document.getElementById("pigs");
+const pigsSpotElement = document.getElementById("pigs-spot");
+const positionsNameElement = document.getElementById("positions-name");
 const pointsPlayer1Element = document.getElementById("points-player1");
 
 function pickRandomPigsPosition() {
@@ -58,6 +60,13 @@ function updatePigsImg() {
   if (round.activePlayer.currentPigsPosition === "pig-out") {
     pigsImgElement.src = "./assets/images/pig-out.png";
     return;
+  }
+}
+
+function endRound() {
+  if ((round.roundOver = true)) {
+    round.activePlayer = new Player("Player 2");
+    round.roundOver = false;
   }
 }
 

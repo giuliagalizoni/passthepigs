@@ -15,9 +15,11 @@ const SELECTION_ENUM = {
 };
 
 class Round {
-  constructor(player) {
-    this.activePlayer = player;
-    this.roundOver = false;
+  constructor(player1, player2) {
+    this.activePlayer = player1;
+    this.playerWating = player2;
+    this.gameOver = false;
+    this.winner = "";
   }
 
   addPoints() {
@@ -34,7 +36,7 @@ class Round {
     } else if (
       this.activePlayer.currentPigsPosition === SELECTION_ENUM.makingBacon
     ) {
-      this.activePlayer.points = 0;
+      this.activePlayer.points += 0;
     } else if (
       this.activePlayer.currentPigsPosition === SELECTION_ENUM.razorback
     ) {
@@ -47,7 +49,18 @@ class Round {
       this.activePlayer.currentPigsPosition === SELECTION_ENUM.pigOut
     ) {
       this.activePlayer.points = 0;
-      this.roundOver = true;
+    }
+  }
+
+  passThePigs(player) {
+    // terminar a rodada
+    this.activePlayer = player;
+  }
+
+  checkWinner() {
+    if (this.activePlayer.points >= 100) {
+      this.winner = this.activePlayer;
+      this.gameOver = true;
     }
   }
 }
@@ -62,12 +75,6 @@ class Player {
   rollThePigs(position) {
     // escolher aleatóriamente uma posição
     this.currentPigsPosition = SELECTION_ENUM[position];
-  }
-
-  passThePigs() {
-    // terminar a rodada
-    Round.roundOver = true;
-    this.points = Round.roundPoints;
   }
 }
 

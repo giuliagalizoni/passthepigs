@@ -7,7 +7,6 @@ body {
 
 .container {
   height: 700px;
-  border: solid red;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -22,15 +21,15 @@ h1 {
 
 .game-board {
   width: 90%;
-  height: 70%;
+  height: 65%;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .player {
-  height: 430px;
-  width: 400px;
+  height: 400px;
+  width: 360px;
   text-align: center;
   background-color: #ebebff;
   border-radius: 8%;
@@ -38,6 +37,11 @@ h1 {
 
 .player p {
   font-size: 5vh;
+}
+
+.message {
+  text-align: center;
+  font-size: 4vh;
 }
 
 .pigs {
@@ -67,4 +71,17 @@ h1 {
 
 .btn-roll {
   background-color: #00e673;
+}
+
+button:hover {
+  background-color: yellow;
+}
+
+.highlight-active-player {
+  border: solid 8px #ff884d;
+  box-shadow: ;
+}
+
+.game-over {
+  background-color: rgb(204, 204, 204, 80);
 }

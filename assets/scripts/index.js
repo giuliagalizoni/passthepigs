@@ -97,8 +97,9 @@ function updatePigsImg() {
   }
   if (round.activePlayer.currentPigsPosition === "pig-out") {
     pigsImgElement.src = "./assets/images/pig-out.png";
-    messageElement.innerText = "PIG OOOUT! You lost your turn";
+    messageElement.innerText = "PIG OUT!";
     changePlayers();
+    highlighActivePlayer();
     return;
   }
 }
@@ -110,11 +111,17 @@ function cleanMessage() {
 function declareWinner() {
   round.checkWinner();
   if (round.winner === player1) {
-    messageElement.innerText = "Player 1 wins!";
-    pigsImgElement.src = "";
+    // player1Element.insertAdjacentHTML(
+    //   "beforeend",
+    //   `<p class="message">WINER!</p>`
+    // );
+    player1Element.innerHTML = `<p class="message">WINER!</p>`;
   } else if (round.winner === player2) {
-    messageElement.innerText = "Player 2 wins!";
-    pigsImgElement.src = "";
+    // player2Element.insertAdjacentHTML(
+    //   "beforeend",
+    //   `<p class="message">WINER!</p>`
+    // );
+    player2Element.innerHTML = `<p class="message">WINER!</p>`;
   }
 }
 
@@ -122,7 +129,6 @@ rollBtnElement.addEventListener("click", () => {
   if (round.gameOver === true) {
     return;
   }
-
   highlighActivePlayer();
   rollThePigsPlay();
   declareWinner();
@@ -137,3 +143,10 @@ passBtnElement.addEventListener("click", () => {
   changePlayers();
   highlighActivePlayer();
 });
+
+window.addEventListener("load", () => {
+  highlighActivePlayer();
+});
+
+// botão de new game?
+// destaque do current player só funciona no click - acho que consegui, mas não sei se é a melhor forma

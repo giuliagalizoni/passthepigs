@@ -14,54 +14,75 @@ const SELECTION_ENUM = {
   pigOut: "pig-out",
 };
 
-class Round {
+class Game {
   constructor(player1, player2) {
     this.activePlayer = player1;
     this.playerWating = player2;
+    this.roundPoints = 0;
+    this.roundOver = false;
     this.gameOver = false;
     this.winner = "";
   }
 
-  addPoints() {
+  countRoundPoints() {
     if (
       this.activePlayer.currentPigsPosition === SELECTION_ENUM.leaningJowler
     ) {
-      this.activePlayer.points += 15;
+      this.roundPoints += 15;
     } else if (
       this.activePlayer.currentPigsPosition === SELECTION_ENUM.snouter
     ) {
-      this.activePlayer.points += 10;
+      this.roundPoints += 10;
     } else if (this.activePlayer.currentPigsPosition === SELECTION_ENUM.sider) {
-      this.activePlayer.points += 1;
+      this.roundPoints += 1;
     } else if (
       this.activePlayer.currentPigsPosition === SELECTION_ENUM.makingBacon
     ) {
-      this.activePlayer.points += 0;
+      this.roundPoints += 0;
     } else if (
       this.activePlayer.currentPigsPosition === SELECTION_ENUM.razorback
     ) {
-      this.activePlayer.points += 5;
+      this.roundPoints += 5;
     } else if (
       this.activePlayer.currentPigsPosition === SELECTION_ENUM.piggyBack
     ) {
-      this.activePlayer.points += 1;
+      this.roundPoints += 1;
     } else if (
       this.activePlayer.currentPigsPosition === SELECTION_ENUM.pigOut
     ) {
-      this.activePlayer.points = 0;
+      this.roundPoints = 0;
+      this.roundOver = true;
     }
+  }
+
+  addPoints() {
+    if (this.roundOver) {
+      this.activePlayer.points += this.roundPoints;
+    }
+  }
+
+  endRound() {
+    this.roundOver = true;
   }
 
   passThePigs(player) {
     // terminar a rodada
     this.activePlayer = player;
+    this.roundOver = false;
+    this.roundPoints = 0;
   }
 
   checkWinner() {
     if (this.activePlayer.points >= 100) {
-      this.winner = this.activePlayer;
       this.gameOver = true;
     }
+  }
+
+  newGame() {
+    this.gameOver = false;
+    this.activePlayer.points = 0;
+    this.playerWating.points = 0;
+    this.winner = "";
   }
 }
 

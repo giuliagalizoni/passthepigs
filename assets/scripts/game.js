@@ -65,16 +65,26 @@ class Game {
     this.roundOver = true;
   }
 
-  passThePigs(player) {
+  passThePigs(player1, player2) {
     // terminar a rodada
-    this.activePlayer = player;
+    this.activePlayer = player1;
+    this.playerWating = player2;
     this.roundOver = false;
     this.roundPoints = 0;
   }
 
   checkWinner() {
     if (this.activePlayer.points >= 100) {
+      this.winner = this.activePlayer;
+      this.roundOver = true;
       this.gameOver = true;
+      return;
+    }
+    if (this.playerWating.points >= 100) {
+      this.winner = this.playerWating;
+      this.roundOver = true;
+      this.gameOver = true;
+      return;
     }
   }
 
@@ -98,19 +108,3 @@ class Player {
     this.currentPigsPosition = SELECTION_ENUM[position];
   }
 }
-
-// const round = new Round(new Player("Giulia"));
-
-// round.activePlayer.rollThePigs("leaningJowler");
-// round.addPoints();
-
-// round.activePlayer.rollThePigs("sider");
-// round.addPoints();
-
-// round.activePlayer.rollThePigs("razorback");
-// round.addPoints();
-
-// round.activePlayer.rollThePigs("pigOut");
-// round.addPoints();
-
-// console.log(round);

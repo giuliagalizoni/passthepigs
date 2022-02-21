@@ -6,6 +6,7 @@ const player1Element = document.getElementById("player1");
 const player2Element = document.getElementById("player2");
 const rollBtnElement = document.getElementById("btn-roll-the-pigs");
 const passBtnElement = document.getElementById("btn-pass-the-pigs");
+const getBtnElement = document.getElementById("btn-get-points");
 const pigsImgElement = document.getElementById("pigs");
 const pigsSpotElement = document.getElementById("pigs-spot");
 const messageElement = document.getElementById("message");
@@ -63,27 +64,13 @@ function updatePlayerPoints() {
   }
 }
 
-function changePlayers() {
-  if (game.activePlayer === player1) {
-    game.passThePigs(player2);
-    return;
-  }
-  if (game.activePlayer === player2) {
-    game.passThePigs(player1);
-  }
-}
-
-function rollAfterTimeOut(func) {
-  setTimeout(func, 1000);
-}
-
-function animation() {
-  cleanMessage();
-  pigsImgElement.src = "./assets/images/pigs-gif.gif";
+function clearMessage() {
+  messageElement.innerText = "";
 }
 
 function updatePigsImg() {
-  cleanMessage();
+  clearMessage();
+  pigsImgElement.classList.remove("first-img");
   if (game.activePlayer.currentPigsPosition === "leaning-jowler") {
     pigsImgElement.src = "./assets/images/leaning-jowler.png";
     messageElement.innerText = "Leaning jowler!";
@@ -111,50 +98,80 @@ function updatePigsImg() {
   }
   if (game.activePlayer.currentPigsPosition === "piggy-back") {
     pigsImgElement.src = "./assets/images/piggy-back.png";
-    messageElement.innerText = "Piggy back!!";
+    messageElement.innerText = "Piggy back!";
     return;
   }
   if (game.activePlayer.currentPigsPosition === "pig-out") {
     pigsImgElement.src = "./assets/images/pig-out.png";
     messageElement.innerText = "PIG OUT!";
-    changePlayers();
-    highlighActivePlayer();
+    startNewRound();
     return;
   }
 }
 
-function cleanMessage() {
-  messageElement.innerText = "";
+function animation() {
+  messageElement.innerText = "Wait for it...";
+  pigsImgElement.classList.remove("first-img");
+  pigsImgElement.src = "./assets/images/pigs-gif.gif";
+}
+
+function changePlayers() {
+  if (game.activePlayer === player1) {
+    game.passThePigs(player2, player1);
+    return;
+  }
+  if (game.activePlayer === player2) {
+    game.passThePigs(player1, player2);
+  }
+}
+
+function roundOver() {
+  game.endRound();
+  game.addPoints();
+  updatePlayerPoints();
+  declareWinner();
+}
+
+function startNewRound() {
+  rollBtnElement.disabled = false;
+  getBtnElement.disabled = false;
+  changePlayers();
+  highlighActivePlayer();
+  updateRoundPoints();
 }
 
 function declareWinner() {
   game.checkWinner();
   if (game.winner === player1) {
-    // player1Element.insertAdjacentHTML(
-    //   "beforeend",
-    //   `<p class="message">WINER!</p>`
-    // );
-    player1Element.innerHTML = `<p class="message">WINER!</p>`;
+    player1Element.innerHTML = `<p class="message">WINNER!</p>`;
   } else if (game.winner === player2) {
-    // player2Element.insertAdjacentHTML(
-    //   "beforeend",
-    //   `<p class="message">WINER!</p>`
-    // );
-    player2Element.innerHTML = `<p class="message">WINER!</p>`;
+    player2Element.innerHTML = `<p class="message">WINNER!</p>`;
   }
-  return;
+}
+
+function clearBoard() {
+  clearMessage();
+  pigsImgElement.src = "./assets/images/snouter.png";
+  pigsImgElement.classList.add("first-img");
+  roundPointsElement.innerText = "";
+  if (game.activePlayer === player1) {
+    player1Element.classList.remove("highlight-active-player");
+  } else if (game.activePlayer === player2) {
+    player2Element.classList.remove("highlight-active-player");
+  }
 }
 
 function gameOver() {
   if (game.gameOver === true) {
-    // rollBtnElement.disabled = true;
-    // passBtnElement.disabled = true;
     rollBtnElement.remove();
     passBtnElement.remove();
+    getBtnElement.remove();
     gameBoardElement.insertAdjacentHTML(
       "afterend",
       `<button id="btn-new-game" class="btn">NEW GAME</button>`
     );
+    game.endRound();
+    clearBoard();
   }
 }
 
@@ -163,35 +180,28 @@ function startNewGame() {
   document.location.reload(true);
 }
 
-function startNewRound() {
-  changePlayers();
-  highlighActivePlayer();
-  updateRoundPoints();
-  console.log(game);
-}
-function roundOver() {
-  game.endRound();
-  game.addPoints();
-  updatePlayerPoints();
-  declareWinner();
-}
-function countWinnerPoints() {
-  if (game.roundPoints + game.activePlayer.points >= 100) {
-    roundOver();
-  }
+function rollAfterTimeOut(func) {
+  setTimeout(func, 1000);
 }
 
 rollBtnElement.addEventListener("click", () => {
   highlighActivePlayer();
   animation();
   rollAfterTimeOut(rollThePigsPlay);
-  countWinnerPoints;
   declareWinner();
 });
 
-passBtnElement.addEventListener("click", () => {
+getBtnElement.addEventListener("click", () => {
+  rollBtnElement.disabled = true;
+  getBtnElement.disabled = true;
+  clearBoard();
   roundOver();
-  setTimeout(startNewRound, 10);
+  gameOver();
+});
+
+passBtnElement.addEventListener("click", () => {
+  startNewRound();
+  // setTimeout(startNewRound, 10);
 });
 
 window.addEventListener("load", () => {
@@ -203,7 +213,3 @@ containerElement.addEventListener("click", (e) => {
     startNewGame();
   }
 });
-
-// botão de new game?
-// destaque do current player só funciona no click - acho que consegui, mas não sei se é a melhor forma
-// colocar animação nas imagens

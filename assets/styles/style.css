@@ -30,7 +30,7 @@ h1 {
 }
 
 .player {
-  height: 70%;
+  height: 75%;
   width: 25%;
   display: flex;
   flex-direction: column;
@@ -50,7 +50,7 @@ h1 {
 
 .message {
   font-size: 5vh;
-  font-weight: bold;
+  font-weight: bolder;
   text-align: center;
   color: darkslateblue;
   padding: 0;
@@ -60,16 +60,20 @@ h1 {
 .pigs {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
-  width: 350px;
-  height: 350px;
+  width: 400px;
+  height: 400px;
   background-color: #ff884d;
   border-radius: 50%;
 }
 
 .pig-img {
   width: 270px;
+}
+
+.first-img {
+  filter: brightness(-100%);
 }
 
 .btn {
@@ -88,6 +92,11 @@ h1 {
 
 .btn-roll {
   background-color: #00e673;
+}
+
+.btn-get {
+  background-color: darkslateblue;
+  color: #fff;
 }
 
 .btn:hover {

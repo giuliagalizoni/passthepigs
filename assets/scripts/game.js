@@ -38,7 +38,9 @@ class Game {
     } else if (
       this.activePlayer.currentPigsPosition === SELECTION_ENUM.makingBacon
     ) {
-      this.roundPoints += 0;
+      this.roundPoints = 0;
+      this.activePlayer.points = 0;
+      this.roundOver = true;
     } else if (
       this.activePlayer.currentPigsPosition === SELECTION_ENUM.razorback
     ) {

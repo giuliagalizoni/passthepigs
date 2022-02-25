@@ -89,6 +89,7 @@ function updatePigsImg() {
   if (game.activePlayer.currentPigsPosition === "makin-bacon") {
     pigsImgElement.src = "./assets/images/makin-bacon.png";
     messageElement.innerText = "Makin' bacon!";
+    startNewRound();
     return;
   }
   if (game.activePlayer.currentPigsPosition === "razorback") {

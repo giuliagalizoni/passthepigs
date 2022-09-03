@@ -64,8 +64,7 @@ h1 {
   align-items: center;
   width: 400px;
   height: 400px;
-  /* background-color: #ff884d; */
-  background-color: red;
+  background-color: #ff884d;
   border-radius: 50%;
 }
 
